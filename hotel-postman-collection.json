@@ -1,0 +1,720 @@
+{
+  "info": {
+    "_postman_id": "b3e9b1d7-2f74-4b52-9b24-91e84a2e5d01",
+    "name": "Hotel API - Colección CRUD Completa",
+    "description": "Colección de Postman para probar todos los endpoints y operaciones CRUD de la API Hotel (Spring Boot en puerto 8181).\n\nOrden sugerido de ejecución para respetar llaves foráneas:\n1. Clientes\n2. Habitaciones\n3. Restaurantes\n4. Tipos de Plato (asociados a un Restaurante)\n5. Reservas (asociadas a un Cliente y una Habitación)\n6. Platos Comprados (asociados a un Tipo de Plato y una Reserva)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8181",
+      "type": "string"
+    },
+    {
+      "key": "clientId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "clientDocument",
+      "value": "1098765432",
+      "type": "string"
+    },
+    {
+      "key": "roomId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "roomNumber",
+      "value": "101",
+      "type": "string"
+    },
+    {
+      "key": "restaurantId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "dishTypeId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "reservationId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "purchasedDishId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Clientes (Clients)",
+      "item": [
+        {
+          "name": "Crear Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos Gomez\",\n  \"document\": \"1098765432\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients"]
+            },
+            "description": "Registra un nuevo cliente."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients"]
+            },
+            "description": "Obtiene la lista de todos los clientes registrados."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/{{clientId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "{{clientId}}"]
+            },
+            "description": "Consulta la información de un cliente por su ID numérico."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Cliente por Documento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/document/{{clientDocument}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "document", "{{clientDocument}}"]
+            },
+            "description": "Busca un cliente según su número de documento de identidad."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos Gomez Actualizado\",\n  \"document\": \"1098765432\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/{{clientId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "{{clientId}}"]
+            },
+            "description": "Actualiza la información de un cliente existente por ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/{{clientId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "{{clientId}}"]
+            },
+            "description": "Elimina un cliente por su ID."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Habitaciones (Rooms)",
+      "item": [
+        {
+          "name": "Crear Habitación",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number\": \"101\",\n  \"capacity\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/rooms",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rooms"]
+            },
+            "description": "Registra una nueva habitación."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todas las Habitaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rooms",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rooms"]
+            },
+            "description": "Obtiene la lista de todas las habitaciones registradas."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Habitación por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rooms/{{roomId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rooms", "{{roomId}}"]
+            },
+            "description": "Consulta los detalles de una habitación por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Habitación por Número",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rooms/number/{{roomNumber}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rooms", "number", "{{roomNumber}}"]
+            },
+            "description": "Busca una habitación mediante su número (ej. '101')."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Habitación",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number\": \"101\",\n  \"capacity\": 3\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/rooms/{{roomId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rooms", "{{roomId}}"]
+            },
+            "description": "Actualiza la información de una habitación existente por ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Habitación",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rooms/{{roomId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rooms", "{{roomId}}"]
+            },
+            "description": "Elimina una habitación por su ID."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Restaurantes (Restaurants)",
+      "item": [
+        {
+          "name": "Crear Restaurante",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Restaurante Gourmet Sol\",\n  \"address\": \"Piso 1, Hotel Plaza Principal\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurants",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "restaurants"]
+            },
+            "description": "Registra un nuevo restaurante en el sistema."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los Restaurantes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurants",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "restaurants"]
+            },
+            "description": "Obtiene la lista completa de restaurantes."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Restaurante por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "restaurants", "{{restaurantId}}"]
+            },
+            "description": "Consulta la información de un restaurante por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Restaurante",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Restaurante Gourmet Sol & Terraza\",\n  \"address\": \"Piso 1 y Terraza, Hotel Plaza Principal\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "restaurants", "{{restaurantId}}"]
+            },
+            "description": "Actualiza los datos de un restaurante existente."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Restaurante",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "restaurants", "{{restaurantId}}"]
+            },
+            "description": "Elimina un restaurante por su ID."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Tipos de Plato (Dish Types)",
+      "item": [
+        {
+          "name": "Crear Tipo de Plato",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurantId\": {{restaurantId}},\n  \"name\": \"Desayuno Americano\",\n  \"description\": \"Huevos revueltos, tostadas francesas, tocineta crujiente y café de la casa\",\n  \"price\": 25000.00\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/dish-types",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dish-types"]
+            },
+            "description": "Registra un nuevo plato o tipo de plato asociado a un restaurante."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los Tipos de Plato",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dish-types",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dish-types"]
+            },
+            "description": "Obtiene todos los tipos de plato registrados."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Tipo de Plato por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dish-types/{{dishTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dish-types", "{{dishTypeId}}"]
+            },
+            "description": "Consulta un tipo de plato por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Tipos de Plato por Restaurante",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dish-types/restaurant/{{restaurantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dish-types", "restaurant", "{{restaurantId}}"]
+            },
+            "description": "Obtiene la lista de platos que pertenecen a un restaurante específico."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Tipo de Plato",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurantId\": {{restaurantId}},\n  \"name\": \"Desayuno Americano Especial\",\n  \"description\": \"Huevos revueltos, jugo de naranja recién exprimido, tostadas francesas y café de origen\",\n  \"price\": 28000.00\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/dish-types/{{dishTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dish-types", "{{dishTypeId}}"]
+            },
+            "description": "Actualiza la información y precio de un plato existente."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Tipo de Plato",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/dish-types/{{dishTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dish-types", "{{dishTypeId}}"]
+            },
+            "description": "Elimina un tipo de plato por su ID."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Reservas (Reservations)",
+      "item": [
+        {
+          "name": "Crear Reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": {{clientId}},\n  \"roomId\": {{roomId}},\n  \"price\": 180000.00,\n  \"startDate\": \"2026-11-01\",\n  \"endDate\": \"2026-11-05\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations"]
+            },
+            "description": "Crea una reserva asignada a un cliente y a una habitación para un rango de fechas."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todas las Reservas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations"]
+            },
+            "description": "Obtiene la lista completa de reservas."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Reserva por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations/{{reservationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations", "{{reservationId}}"]
+            },
+            "description": "Consulta los detalles de una reserva por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Reservas por Cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations/client/{{clientId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations", "client", "{{clientId}}"]
+            },
+            "description": "Obtiene todas las reservas asociadas a un cliente específico."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Reservas por Habitación",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations/room/{{roomId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations", "room", "{{roomId}}"]
+            },
+            "description": "Obtiene todas las reservas asignadas a una habitación específica."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Reserva",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": {{clientId}},\n  \"roomId\": {{roomId}},\n  \"price\": 220000.00,\n  \"startDate\": \"2026-11-01\",\n  \"endDate\": \"2026-11-06\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations/{{reservationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations", "{{reservationId}}"]
+            },
+            "description": "Actualiza las fechas, precio o asignación de una reserva existente."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Reserva",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservations/{{reservationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservations", "{{reservationId}}"]
+            },
+            "description": "Elimina una reserva por su ID."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "6. Platos Comprados (Purchased Dishes)",
+      "item": [
+        {
+          "name": "Registrar Compra de Plato",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dishTypeId\": {{dishTypeId}},\n  \"reservationId\": {{reservationId}},\n  \"quantity\": 2,\n  \"paid\": false,\n  \"date\": \"2026-11-02\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes"]
+            },
+            "description": "Registra el consumo o compra de un plato con cargo a una reserva."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los Platos Comprados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes"]
+            },
+            "description": "Obtiene todos los consumos o platos comprados registrados."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Plato Comprado por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes/{{purchasedDishId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes", "{{purchasedDishId}}"]
+            },
+            "description": "Consulta el detalle de un consumo por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Platos Comprados por Reserva",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes/reservation/{{reservationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes", "reservation", "{{reservationId}}"]
+            },
+            "description": "Obtiene la lista de platos consumidos cargados a una reserva específica."
+          },
+          "response": []
+        },
+        {
+          "name": "Filtrar Platos Comprados por Estado de Pago",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes/paid?paid=false",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes", "paid"],
+              "query": [
+                {
+                  "key": "paid",
+                  "value": "false",
+                  "description": "Booleano: true para pagados, false para pendientes"
+                }
+              ]
+            },
+            "description": "Filtra compras de platos según si han sido pagadas o están pendientes."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Plato Comprado",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dishTypeId\": {{dishTypeId}},\n  \"reservationId\": {{reservationId}},\n  \"quantity\": 3,\n  \"paid\": true,\n  \"date\": \"2026-11-02\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes/{{purchasedDishId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes", "{{purchasedDishId}}"]
+            },
+            "description": "Actualiza la cantidad, estado de pago o fecha de un plato comprado."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Plato Comprado",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchased-dishes/{{purchasedDishId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchased-dishes", "{{purchasedDishId}}"]
+            },
+            "description": "Elimina un registro de plato comprado por su ID."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
